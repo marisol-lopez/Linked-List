@@ -1,4 +1,3 @@
-
 # Defines a node in the singly linked list
 class Node
   attr_reader :data # allow external entities to read value but not write
@@ -19,91 +18,131 @@ class LinkedList
   # method to add a new node with the specific data value in the linked list
   # insert the new node at the beginning of the linked list
   def insert(value)
-    puts "Not implemented"
+    if @head == nil
+      @head = Node.new(value)
+    else
+      current = @head
+      @head = Node.new(value)
+      @head.next = current
+    end
   end
 
   # method to find if the linked list contains a node with specified value
   # returns true if found, false otherwise
   def search(value)
-    puts "Not implemented"
+    current = @head
+    while current != nil
+      if current.data == value
+        return true
+      else
+        current = current.next
+      end
+    end
+    return false
   end
 
   # method to return the max value in the linked list
   # returns the data value and not the node
   def find_max
-    puts "Not implemented"
+    # create a temp variable called max, and set it to the beginning of the linked list
+    max = @head.data
+    current = @head
+    while current != nil
+      if current.data > max
+        max = current.data
+      end
+      current = current.next
+    end
+    return max
   end
 
   # method to return the min value in the linked list
   # returns the data value and not the node
   def find_min
-    puts "Not implemented"
+    min = @head.data
+    current = @head
+    while current != nil
+      if current.data < min
+        min = current.data
+      end
+        current = current.next
+    end
+    return min
   end
 
   # method that returns the length of the singly linked list
   def length
-    puts "Not implemented"
+    count = 0
+    current = @head
+    while current != nil
+      count += 1
+      current = current.next
+    end
+    return count
   end
 
   # method to return the value of the nth element from the beginning
   # assume indexing starts at 0 while counting to n
   def find_nth_from_beginning(n)
-    puts "Not implemented"
+
   end
 
   # method to insert a new node with specific data value, assuming the linked
   # list is sorted in ascending order
   def insert_ascending(value)
-    puts "Not implemented"
+
   end
 
   # method to print all the values in the linked list
   def visit
-    puts "Not implemented"
+
   end
 
   # method to delete the first node found with specified value
   def delete(value)
-    puts "Not implemented"
+
   end
 
   # method to reverse the singly linked list
   # note: the nodes should be moved and not just the values in the nodes
   def reverse
-    puts "Not implemented"
+    current = @head
+    previous = nil
+    while current != nil
+      temp = current.next # save state
+      current.next = previous # update link
+      # move to next
+      previous = current
+      current = temp
+    end
+    @head = previous
   end
+
+# STOP HERE
 
   ## Advanced Exercises
   # returns the value at the middle element in the singly linked list
   def find_middle_value
-    puts "Not implemented"
+
   end
 
   # find the nth node from the end and return its value
   # assume indexing starts at 0 while counting to n
   def find_nth_from_end(n)
-    puts "Not implemented"
+
   end
 
   # checks if the linked list has a cycle. A cycle exists if any node in the
   # linked list links to a node already visited.
   # returns true if a cycle is found, false otherwise.
   def has_cycle
-    puts "Not implemented"
+
   end
 
   # Creates a cycle in the linked list for testing purposes
   # Assumes the linked list has at least one node
   def create_cycle
-    return if @head == nil # don't do anything if the linked list is empty
 
-    # navigate to last node
-    current = @head
-    while current.next != nil
-      current = current.next
-    end
-
-    current.next = @head # make the last node link to first node
   end
 end
 
@@ -165,7 +204,7 @@ puts "Confirming min and max values in the linked list."
 min = my_linked_list.find_min
 puts "BUG: Min value should be 1 and not #{min}" if min != 1
 max = my_linked_list.find_max
-puts "BUG: Max value should be 6 and not #{max}" if max != 6
+puts "BUG: Max value should be 5 and not #{max}" if max != 6
 
 # delete value
 puts "Deleting node with value 5 from the linked list."
